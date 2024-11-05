@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "Hello World Extension",
+  "version": "1.0",
+  "description": "A simple Chrome extension that displays Hello World and changes background color",
+  "permissions": [
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  }
+}
