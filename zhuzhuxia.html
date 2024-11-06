@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+// 面向对象 OO 
+// 
+// js 对象字面量 创建一个对象
+// js 具有强大的表现力 简单
+const GGbond = {
+  name: "猪猪侠",  // string
+  age: 8, // number  整数 + 浮点数 
+  hometown: "童话镇", // 
+  hobbies: ['美女', '棒棒糖'], // js没有数组， 也是对象
+  isSingle: true, // boolean
+  // 形参
+  sendFlower(target) {
+    target.receiveFlower(GGbond);
+  }
+}
+// 申明了常量对象  对象字面量 从字面意义就可以了解对象
+const FF = {
+  name: '菲菲公主',
+  age: 7,
+  hometown: '梦幻堡',
+  sex: 'female',
+  xq:50,
+  receiveFlower(sender) {
+    if(FF.xq<80){
+      console.log('gun~~~')
+    }
+    else{
+      console.log(sender.name+'送了花，我们在一起吧！') 
+    }
+    // console.log(sender.name + '送了花')
+  }
+}
+// 用js做导演
+const CRQ={
+  name:'超人强',
+  hometown:'童话镇',
+//收花的权利, 接口 interface
+  receiveFlower(sender){
+    //恒等
+    // if(sender.name === '猪猪侠'){
+    //   console.log('我会帮你送给菲菲公主的')
+    //   return;
+    // }
+    // FF.receiveFlower(sender)
+    //代理送花意义很大
+      setTimeout(function(){
+        FF.xq=99  
+        FF.receiveFlower(sender)
+
+      },2000)
+    }
+  }
+
+</script>
+</body>
