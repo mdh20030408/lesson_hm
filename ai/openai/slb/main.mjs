@@ -13,7 +13,10 @@ const openai = new OpenAI({
 const response =await openai.completions.create({
     model:'gpt-3.5-turbo-instruct',// 模型名称
     max_tokens:256,// 生成的最大字数
-    prompt:'假如你是林夕这样的爱情歌曲作词大家，请你以写一首100字，主题为爱上森林北的摇滚歌曲。森林北是一位美丽、洒脱、有活力的女孩',
+    // 使用` `可直接，随便的换行
+    prompt:`假如你是林夕这样的爱情歌曲作词大家，
+    请你以写一首100字,主题为爱上森林北的摇滚歌曲。
+    森林北是一位美丽、洒脱、有活力的女孩`,
 
 
 })
