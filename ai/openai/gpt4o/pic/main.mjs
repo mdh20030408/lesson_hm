@@ -5,7 +5,7 @@ dotenv.config();
 
 // 实例化openai 客户端
 const client = new OpenAI({
-    apiKey: 'sk-nwDEG8UhIM78Da5xcPLwsRv0vj83yCVviIxegcYLHlqGFkAe',
+    apiKey: process.env.OPENAI_API_KEY,
     baseURL: 'https://api.302.ai/v1' // 转发    
 })
 

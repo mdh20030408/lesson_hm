@@ -11,50 +11,50 @@
 // 
 // js 对象字面量 创建一个对象
 // js 具有强大的表现力 简单
-const GGbond = {
-  name: "猪猪侠",  // string
-  age: 8, // number  整数 + 浮点数 
-  hometown: "童话镇", // 
-  hobbies: ['美女', '棒棒糖'], // js没有数组， 也是对象
+const dai = {
+  name: "戴佑圣",  // string
+  age: 17, // number  整数 + 浮点数 
+  hometown: "吉安", // 
+  hobbies: ['学习', '搞钱'], // js没有数组， 也是对象
   isSingle: true, // boolean
   // 形参
   sendFlower(target) {
-    target.receiveFlower(GGbond);
+    target.receiveFlower(dai);
   }
 }
 // 申明了常量对象  对象字面量 从字面意义就可以了解对象
-const FF = {
-  name: '菲菲公主',
-  age: 7,
-  hometown: '梦幻堡',
+const xm = {
+  name: '小美',
+  age: 19,
+  hometown: '九江',
   sex: 'female',
   xq:50,
   receiveFlower(sender) {
-    if(FF.xq<80){
+    if(xm.xq<80){
       console.log('gun~~~')
     }
     else{
-      console.log(sender.name+'送了花，我们在一起吧！') 
+      console.log(sender.name+'送了花，万达走一波') 
     }
     // console.log(sender.name + '送了花')
   }
 }
 // 用js做导演
-const CRQ={
-  name:'超人强',
-  hometown:'童话镇',
+const xh={
+  name:'小红',
+  hometown:'吉安',
 //收花的权利, 接口 interface
   receiveFlower(sender){
     //恒等
-    // if(sender.name === '猪猪侠'){
-    //   console.log('我会帮你送给菲菲公主的')
+    // if(sender.name === '戴佑圣'){
+    //   console.log('让我们在一起吧，暗恋你很久了.....')
     //   return;
     // }
-    // FF.receiveFlower(sender)
+    // xm.receiveFlower(sender)
     //代理送花意义很大
       setTimeout(function(){
-        FF.xq=99  
-        FF.receiveFlower(sender)
+        xm.xq=99  
+        xm.receiveFlower(sender)
 
       },2000)
     }
@@ -62,3 +62,4 @@ const CRQ={
 
 </script>
 </body>
+</html>

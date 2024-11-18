@@ -12,4 +12,3 @@ node package management
    git add.
    git commit -m "coze and openai"
    git push origin main
-p
