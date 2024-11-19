@@ -34,7 +34,7 @@
             { "input": "scalable architecture for growing user base", "output": "backend" }
         ];
     // 初始化一个神经网络
-    const network = new brain.recurrent.LSTM();
+        const network = new brain.recurrent.LSTM();
     // 训练 花蛮长时间
     network.train(data,{
         iterations: 2000,
@@ -43,7 +43,7 @@
 
     })
     //执行一下
-    const output = network.run("CSS flex for example layouts");
+    const output = network.run("optimizing SQL queries");
     console.log(output);
 </script>
 </body>

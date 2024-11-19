@@ -42,5 +42,5 @@
  padding 内边距
  content 内容
 
-外部 margin 
+外边距 margin 
 从0开始成为大厂切入崽
