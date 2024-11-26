@@ -1,2 +1,2 @@
-console.log(name);
-var name ="wql";
+console.log(name); // undefined 变量提升
+var name  ="wql" // 

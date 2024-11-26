@@ -6,6 +6,5 @@ function fn(a){
         var b =a;
         console.log(a);
         console.log(c);
-        console.log(b);
     }
 fn(3)
