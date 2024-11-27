@@ -12,4 +12,4 @@ function generateRandomAge(){
 // }
 
 // // 测试函数
-// console.log(generateAge(18, 55));
+console.log(generateRandomAge());
