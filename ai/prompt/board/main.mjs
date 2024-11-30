@@ -27,7 +27,7 @@ const getCompletion =  async (prompt, model="gpt-3.5-turbo") => {
   return response.choices[0].message.content
 }
 
-const main = async () => {                                
+ const main = async () => {                                
     const user_messages = [
         "La performance du système est plus lente que d'habitude.",  //系统的性能比平时慢         
         "Mi monitor tiene píxeles que no se iluminan.",              //我的显示器有些像素点不亮。
@@ -41,15 +41,15 @@ const main = async () => {
         // 简洁 代码可读性
       console.log(issue);
 const prompt=`
- Tell me what language this is :"${issue}"
+ 告诉我是什么语言:"${issue}"
 `
 const countryLanguage = await getCompletion(prompt)
 // console.log(response);
 const resultPrompt = `
-  帮我翻译以下的文字成  中文:"${issue}"
+  帮我翻译以下的文字为中文:"${issue},"
   `
   const result=await getCompletion(resultPrompt)
-  console.log(`${countryLanguage}，翻译结果是${result}`);
+  console.log(`${countryLanguage}翻译结果是:${result}`);
 }
 }
 
