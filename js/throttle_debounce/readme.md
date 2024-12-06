@@ -11,4 +11,43 @@
     Get http://localhost:3001/posts/1 
     Patch http://localhost:3001/posts/1 
   - 资源 db.json  users posts
-  
+  - HTTP 协议
+    Method(动作 GET | PATCH 修改 | POST 新增 ) + url (资源) 请求行
+  - 请求头 Cookie  Content-type：application(text)/json  ...
+  - 请求体 
+
+  - json-server
+    - http 服务
+    - db.json 数据资源向外提供访问 CRUD 
+
+- 会设计restful api 接口
+  - 需求
+    - 新增一篇文章 
+      http://localhost:3001/posts POST 
+      {
+        。。。。
+      }
+
+    - 删除 文章2
+      http://localhost:3000/post2/2 DELE
+
+- json-server 是一个支持restful api 设计的数据服务器
+
+- 全栈防抖
+  - 前后端分离 解耦
+    - 前端 live-server 5500
+       fetch url
+    - 后端 json-server 3001
+      url 接口服务 restful
+    - api 接口 
+
+- filter、map
+  - 都是Arry.prototype 上的方法， 所有数组都有
+  - filter 数组过滤，回调函数返回值是否为true，
+  - map 数组映射，回调函数返回值为新的数组 原有数组 不能满足需求
+  - forEach 迭代每一项 不需要返回
+
+  - 防抖 
+    - 将要执行的函数交给一个debounce() 高阶函数去优化 
+    - 减少执行次数 只执行连续输入最后一次
+    - 定时器 本次使用时关掉上一次的定时器
