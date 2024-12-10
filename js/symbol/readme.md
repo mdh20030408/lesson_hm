@@ -19,4 +19,6 @@
             getOwnPropertySymbols 来获取
 
     - ownProperty?
+
+    .call和apply 是同步执行方法，当定时器开始运行时，还未到达定时器时间，call就会立即执行。因此，call和apply会立即执行。
       
