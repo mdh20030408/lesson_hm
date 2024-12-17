@@ -11,7 +11,7 @@ const person={
 // console.log(wes)
 // wes.age=30
 // console.log(wes,person);
-
+// 不可写writeable
 const wes = Object.freeze(person)
 person.age = 21
 wes.hometown='萍乡'

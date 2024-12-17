@@ -17,7 +17,7 @@ const letterMap = ["", "", "abc", "def", "ghi",
         const digit = digits[index] - '0';
         // console.log(digit)
         const letters = letterMap[digit];
-        console.log(letters);
+        // console.log(letters);
       for(let i =0;i<letters.length;i++){
         // letters[i] 这一次path 收集的开始？
         path.push(letters[i]); // 开始
