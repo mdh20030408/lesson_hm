@@ -25,7 +25,7 @@
   - 从小到大
   - 计算规则
      *10
-     标签 1 类名 10  id 100 行内 1000 ！important 最大
+     标签 1 类名 10  id 100 行内 1000 !important 最大
   - 当选择器比较复杂的时候 优先级加法
     .container ul li:nth-chlid(odd)  22
     一定选择最后的元素 
