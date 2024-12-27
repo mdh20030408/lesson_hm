@@ -37,7 +37,7 @@
   
   const init_map = () => {
     AMapLoader.load({
-      key: '5b0756265d33f9c1d9926a51fc1bfdcc',
+      key: 'c4478e0f5df0500badf419361882fd22',
       version: "2.0",
       plugins: ['AMap.CitySearch']
     }).then(AMap => {
@@ -57,7 +57,7 @@
     init_map();
     setInterval(()=>{
       localTime.value = new Date().toLocaleTimeString();
-    },1000)
+    },100)
   })
   </script>
   
