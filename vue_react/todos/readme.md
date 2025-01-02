@@ -32,3 +32,12 @@
     allDone true/false todos 也得变
   
   - 不犯错误, 数据和界面状态一致
+
+- vue2.0 让开发者 爽 专注于数据业务
+  data
+  method
+  computed
+  简单, 缺点是, 不灵活
+- vue3.0
+  选项式 -> setup 组合式 对应的data + method + computed 放一起
+  有利于大型项目 (组件代码> 100行 ) 的维护
