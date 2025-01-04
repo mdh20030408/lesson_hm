@@ -2,6 +2,7 @@
     <div>
       <div>PostShow {{ postId }}</div>
     </div>
+    <route-view />
 </template>
 
 <script setup>
@@ -11,6 +12,6 @@ const route = useRoute() // 当前路由
 const {postId} = route.params // 路由参数对象
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>
