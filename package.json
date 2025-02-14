@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "koa": "^2.15.3",
+    "request-promise": "^4.2.6",
+    "scrapy": "^0.0.1",
+    "sqlite3": "^5.1.7"
+  }
+}

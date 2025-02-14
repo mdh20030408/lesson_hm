@@ -8,4 +8,9 @@ const service = axios.create({
   timeout: 5000, // 超时时间
 })
 
+service.interceptors.request.use(config => {
+  // 可以在这统一设置请求头
+  console.log(config,'拦截所有请求....')
+  return config
+})
 export default service;

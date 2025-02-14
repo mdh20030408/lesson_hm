@@ -1,9 +1,19 @@
-import jwt from 'jsonwebtoken'
-const {sign} = jwt;
+import pkg from 'jsonwebtoken'
+const {sign} = pkg;
 // 密钥
 const secret= 'g10bqwer123';
 
 export default [
+  {
+    url: '/api/getUserInfo',
+    method: 'get', 
+    response: req =>{
+      // req? token? => decode => user?
+      return {
+        user:'admin'
+      }
+    }
+    },
     {
       url: '/api/login',
       method: 'post',

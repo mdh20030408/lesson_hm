@@ -1,260 +1,145 @@
-/** DOM 树ready 之后 onLoad 晚了， DOMContentLoaded html节点
- *  事件监听
- *  请求....
- * 不出问题， 最快的时机（onLoad 早）
- */
-// 常量配置
-const MESSAGE_LIMIT = 50;
+AI Assistant 全栈项目
+大前端全栈
+后端驱动全栈为主
+设计模式 大前端 前端 mvvm 思想 model(数据状态 useState, ref/reactive, api/axios 接口， pinia) view
 
-document.addEventListener('DOMContentLoaded', function() {
-  // console.log('DOMContentLoaded')
-  const backToTopButton = document.getElementById('back-to-top');
-  const chatLogElement = document.getElementById('chat-log');
-  const conversationListElement = document.getElementById('conversation-list');
-  const messageInput = document.getElementById('message');
-  const loadingIndicator = document.querySelector('.loading-indicator');
-  // scrollTop 
-  chatLogElement.addEventListener('scroll', () => {
-    if (chatLogElement.scrollTop > 300) {
-      backToTopButton.style.display = 'block';
-    } else {
-      backToTopButton.style.display = 'none';
-    }
-  })
+model 模型层 = 数据定义 + 数据处理 + 数据存储 + 数据管理 + 数据请求 view 视图层 = component 组件 views components vm 视图模型层 数据绑定{} {{}} 数据驱动界面（v-if/v-show/v-for）... script 事件监听 @change onChange props
 
-  backToTopButton.addEventListener('click', () => {
-    chatLogElement.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
-  })
-  // 打字机效果
-  const  typeMessage = (bubble, content, callback) => {
-    let index = 0;
-    const intervalId = setInterval(() => {
-      if (index < content.length) {
-        bubble.textContent += content.charAt(index++);
-      } else {
-        // 严谨
-        clearInterval(intervalId)
-        if (typeof callback === 'function') {
-          callback()
-        }
-      }
-    }, 50)
-  }
-  // 添加复制按钮
-  const addCopyButton = (messageWrapper, content) => {
-    const copyButton = document.createElement('button');
-    copyButton.innerHTML = '<i class="fas fa-copy"></i>';
-    copyButton.classList.add('copy-button');
+写到哪算哪， 产品设计线框图 idear 亮点 10分钟
 
-    copyButton.addEventListener('click', () => {
-      // BOM Browser Object Model 浏览器对象模型
-      // 向剪贴板中写入内容
-      navigator.clipboard.writeText(content)
-        .then(() => {
-          alert('内容已复制到剪贴板');
-        })
-        .catch(err => {
-          console.error('无法复制文本：', err);
-          alert('复制失败，清尝试手动选择并复制。');
-        })
-    })
+后端 mvc 思想 数据库 mysql table 简历模型 model 数据库独立于后端的 数据模型文件 schema orm view 视图层 = 前端页面 index.html about.html controller 控制器层
 
-    messageWrapper.appendChild(copyButton);
-  }
-  // 保存聊天记录
-  const saveChatLog = (role, content) => {
-    // localStorage 字符串 JSON.stringify JSON.parse
-    const chatLog = JSON.parse(localStorage.getItem('chatLog')) || [];
-    chatLog.push({
-      role,
-      content
-    })
-    localStorage.setItem('chatLog', JSON.stringify(chatLog))
-  }
+并发数
 
-  // 添加消息 chat-log
-  const appendMessage = (role, content, type='save') => {
-    const messageWrapper = document.createElement('div');
-    messageWrapper.classList.add('message', role); 
+基础设施
 
-    const bubble = document.createElement('div');
-    bubble.classList.add('bubble', `${role}-bubble`);
-    
-    if (role === 'assistant') {
-      // 流式输出
-      typeMessage(
-        bubble, 
-        content, 
-        ()=>addCopyButton(messageWrapper, content)
-      )
-    } else {
-      bubble.textContent = content;
-      messageWrapper.appendChild(bubble);
-    }
-    messageWrapper.appendChild(bubble);
-    chatLogElement.appendChild(messageWrapper);
-    chatLogElement.scrollTop = chatLogElement.scrollHeight;
-    if (type === 'save') {
-      saveChatLog(role, content) // bug 原因
-     }
-    
-  } 
-  // 发送消息 调用接口
-  const sendMessage = (message) => {
-    // fetch promise 的实例
-    return fetch('/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'deepseek-chat',
-        messages: [
-          {"role": "user", "content": message}
-        ],
-        temperature: 0.7
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      // console.log(data, '/////')
-      return data.message
-    })
-    // 链式调用
-   
-  }
+DDos 肉鸡攻击 qps
 
-  // 显示加载中
-  const showLoadingIndicator = () => {
-    if (loadingIndicator) {
-      loadingIndicator.style.display = 'block';
-    }
-  }
-  // 隐藏加载中
-  const hideLoadingIndicator = () => {
-    if (loadingIndicator) {
-      loadingIndicator.style.display = 'none';
-    }
-  }
+后端全栈AI 项目
+python flask 框架 node koa app.py 单点入口
+纯js
+deepseek 在线api
+写文章(ts + next.js + react 思想) + leetcode 150
+面试
 
-  
+项目准备
+安装python 3.10.6
 
-  // 发送消息
-  document.querySelector('.send-icon').addEventListener('click', async () => {
-    const messageText = messageInput.value.trim();
+配置虚拟环境 python -m venv name 本地项目项目依赖 不受全局影响，不影响全局 项目下有了项目依赖包 source ai_assistant/bin/activate
 
-    if (messageText) {
-      appendMessage('user', messageText); // 封装 
-      messageInput.value = '';
-      // llm 接口调用
-      try {
-        showLoadingIndicator();
-        // await 返回promise的耗时任务
-        const assistantMessage = await sendMessage(messageText)
-        hideLoadingIndicator();
-        appendMessage('assistant', assistantMessage);
-      } catch(error) {
-        console.error('发送消息时出错:', error)
-        appendMessage('assistant', '抱歉，我遇到了一个问题，无法回复。')
-      }
-    }
+安装依赖
 
-  })
-  // enter 发送消息
-  messageInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' && !event.shiftKey) { // 回车， 并且没有同时按下shift 
-      event.preventDefault(); // 阻止默认行为
-      document.querySelector('.send-icon').click(); // 触发点击事件
-    }
-  })
+pip install openai Flask python-dotenv -i https://mirrors.aliyun.com/pypi/simple/
 
-  // 对话历史加载 
-  const loadChatLog = () => {
-    const chatLog = JSON.parse(localStorage.getItem('chatLog')) || [];
-    // 负值， 后面开始
-    chatLog.slice(-MESSAGE_LIMIT).forEach(
-      ({ role, content }) => appendMessage(role, content, 'init')
-    )
-  }
-  // 保存当前对话 to be continue 
-  const saveCurrentConversation = () => {
-    const currentChatLog = JSON.parse(localStorage.getItem("chatLog")) || [];
-    const chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
-    const timestamp = new Date().toLocaleString();
-    chatHistory.push({
-      // 产品需求 实现
-      name: `对话 ${chatHistory.length + 1} (${timestamp})`,
-      messages: currentChatLog
-    })
-    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
-  }
+openai 已经成为了aigc LLM 的事实标准 /completion /chat base_url deepseek
 
-  // 创建新的对话
-  const startNewConversation = () => {
-    // console.log('new conversation')
-    saveCurrentConversation();
-    localStorage.removeItem('chatLog');
-    chatLogElement.innerHTML = '';
-  }
+Flask koa 后端框架
 
-  const loadConversationList = () => {
-    const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-    chatHistory.forEach((conversation, index) => {
-      const button = document.createElement('button');
-      button.setAttribute('data-index', index);
-      button.innerHTML = `${conversation.name} <span class="delete-btn" data-index="${index}">x</span>`;
-      // 性能不好
-      // button.onclick = function() {
-      //   console.log(this.innerHTML);
-      // }
-      conversationListElement.appendChild(button);
-    })
-  }
+没有做前后端分离 mvc 开发模式
+前端 static 目录下
+路由 / 显示index.html
+静态文件
 
-  const loadConversation = (index) => {
-    const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-    const conversation = chatHistory[index].messages || [];
-    chatLogElement.innerHTML = '';
-    conversation.slice(-MESSAGE_LIMIT).forEach(({
-      role,
-      content
-    }) => appendMessage(role, content));
-    localStorage.setItem('chatLog', JSON.stringify(conversation)); 
-  }
-  // 删除聊天历史
-  const deleteChatHistory = (index) => {
-    // to be continue
-  }
+js/css/img FE
+启动静态服务器
+状态码 1XX 请求中... 2XX 成功 201 Created 3XX 重定向 4XX 客户端错误 405 Method Not Allowed 方法不允许 代码不会出问题 5XX 服务器错误
 
-  conversationListElement.addEventListener('click', function(event) {
-    console.log(event.target);
-    const index = event.target.getAttribute('data-index') || 0;
-    // remove history 删除历史 
-    if (event.target.nodeName === 'SPAN') {
-      // console.log('/////')
-      deleteChatHistory(index);
-      return;
-    }
-    // 加载历史
-    
-    loadConversation(index);
-  })
+响应头第一个数据包 浏览器或程序 就通过状态码知道怎么处理 程序逻辑的一部分
 
-  const main = () => {
-    loadChatLog();
-    loadConversationList();
-  }
+env
 
-  main();
+界面
+html 结构
 
-  window.startNewConversation = startNewConversation;
-  window.saveCurrentConversation = saveCurrentConversation;
-})
-/* 所有的资源加载完了 */
-// window.addEventListener('load', function(event) {
-//   // 当所有资源（包括样式表、图片等）加载完毕后执行的代码
-//   // console.log('All resources finished loading');
-// });
+写注释
+图标字体库 font-awesome iconfont
+性能优化
+小图标都用图片，http 请求数的暴涨，网页同时并发请求数是有上限的
+下载一个图标字体文件
+fas fa-comment-alt
+font-awesome 不提供选择， 都是一样的
+css 样式的组合 面向对象特性 多态 方便复用和维护 tailwindcss 原子类
+textarea LLM 支持比较多的tokens 出入长度 kimi deepseek
+html5
+语义化标签
+无障碍访问 label + for
+form 表达增强功能 input type [number|range....] placeholder
+css
+
+弹性布局
+
+居中
+flex-direction: row|column
+align-items 纵轴
+justify-content 横轴 flex-start space-between
+grid 布局 display:grid; grid-template-columns: 1fr 1fr; gap 24px
+
+响应式布局 width max-width @media screen and (max-width: 768px) {
+
+}
+
+transition animation
+
+width transition ipad 旋转屏幕
+transition: 多个属性分别设置
+面向对象思想
+
+封装 多态 继承
+button 样式组件 基础样式 UI风格 antd
+组合业务样式 primary secondary default -> tailwindcss 原子类
+calc CSS中执行简单的数学运算,用于动态布局设计中精确控制元素大小与位置。 性能有一点的问题， 不能滥用， 涉及不必要的重绘重排
+
+flex: 1; flex-grow 1 其他子元素没有设置， 主元素，其他元素占完后，剩下的都归他来grow ; 多个子元素都设置 按比例划分。 flex-basis flex-shrink
+
+js
+
+用户体验
+keydown enter 阻止默认行为
+event.preventDefault
+promise 的使用 await 后面的肯定是promise 或返回promise实例的函数 then 链式调用 处理函数返回的任然是promise 链式调用 如果不是呢？ promise.resolve()包一下
+BOM
+navigator.userAgent 操作系统 浏览器版本 内核
+navigator.clipboard
+localStorage
+本地存储
+本地存储的大小 5M 4096kb 4096 * 1024 4M cookie kb 带上
+getItem(null) null
+setItem
+array, string 方法强化一下 slice 负数
+event 事件机制
+dom level 和 event 两个带年 dom level 涉及和event 相关的定义
+onclick(内嵌 DOM level 0) addEventListener(事件监听 DOM 2 )
+小红书（JS高级程序设计）
+事件冒泡| 捕获
+事件委托 事件监听 内存开销比较大的
+利用冒泡机制 父元素上 监听一次 性能好 事件委托
+event.target 目标元素 data-index 数据属性
+产品需求
+
+产品经理提出产品需求
+设计师 界面设计
+前端 vue/react 完成需求
+分析
+技术设计
+代码实现
+debug
+交付上线
+后端 数据和mvc 提供api
+代码风格
+
+注释
+封装
+一个函数只做一件事
+一个函数不超过10行
+es6+ 风格 promise + async/await
+业务
+界面业务
+grid布局
+transition
+css 面向对象
+scrollToTop 业务
+发消息业务
+流式输出
+剪贴版功能
+聊天历史分组功能
+localStorage chatLog

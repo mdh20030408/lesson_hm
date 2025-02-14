@@ -82,3 +82,15 @@
   - npm i jsonwebtoken    json?+web+令牌
   - sign 签发 
   - token -> verify 方法 返回用户对象 name  avatar。。。。。
+
+- mock 前后端通信的工作流程
+ - vitejs 启用 viteMockServe 插件
+ - mock 目录下的文件 申明模拟后端接口
+ - api 目录下 编写了接口的封装 axios
+ - 前端组件onMounted 生命周期 发起接口请求
+
+- 需要验证用户身份的接口
+  - token 在localStorage 中
+  - ？token=${token} 每个请求都得带上 烦
+  - req 请求行 请求头  请求体 (post get 没有)
+  - 请求头 Authorization: Bearer ${token}

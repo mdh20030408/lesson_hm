@@ -1,17 +1,17 @@
 <script setup>
 import LifecycleComponent from './components/LifecycleComponent.vue';
 import { ref } from 'vue';
-const count = ref(0);
-const showComponent = ref(true); // 
+// option 选项式API -> 组合式 composition API
 const width = ref(100);
 const change = () => {
   width.value += 100;
 }
-
+const showComponent = ref(true); // 
 const toggleComponent = () => {
   showComponent.value = !showComponent.value;
 }
 
+const count = ref(0);
 const incrementCount = () => {
   count.value++;
 }
