@@ -49,3 +49,26 @@
     只要有一个成功 就返回成功的结果
   
   - 并发 -> 并行
+
+  - 手写题的套路
+    - 通过注释的方式 表达自己的思路
+
+  - react 性能优化
+    - useMemo
+    - useCallback
+
+    - interface ts 的核心概念
+      自定义类型的一个方式
+      type  区别
+       - 子组件 props
+       - 父组件必须提供Props 约定的参数
+    - 组件响应式
+      - 改变后 组件函数是会重新运行的
+        - 开销大
+        - 性能问题
+        - 没有必要
+    - React.memo 缓存组件
+      当子组件props之外的改变时, 子组件无关, 不更新
+      raect 不分 props emit 都叫props
+    - react 有哪些hooks介绍一下
+      - 性能优化相关的

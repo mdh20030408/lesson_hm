@@ -7,8 +7,8 @@ const weather = new Promise((resolve,reject) => {
   
   const tweets = new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve('I like cake, BBQ is ready now !')
-    //   reject('BBQ 糊了')
+      // resolve('I like cake, BBQ is ready now !')
+      reject('BBQ 糊了')
     }, 5000)
   })
   
@@ -17,7 +17,7 @@ const weather = new Promise((resolve,reject) => {
   // js 单线层， 怎么能并发？
   console.time("time")
   Promise
-    .any([weather, tweets])
+    .all([weather, tweets])
     .then(responses => {
       console.log(responses);
     })
