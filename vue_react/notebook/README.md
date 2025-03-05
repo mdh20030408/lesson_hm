@@ -236,3 +236,136 @@
     - prop-type 类型约束 强大
   - utils
     - 封装公用的js 函数 或配置
+  # 开发流程
+  - idear 创意
+    - aigc结合
+  - 需求分析
+    - 用户需求
+    - 功能点
+  - 建立数据库
+    - 设计表结构
+  - 前端开发
+    - react
+  - 后端开发
+    - egg.js
+  - 测试
+  - 部署上线
+
+ ## 代码开发风格的一部分
+
+  - AI编程工具的使用
+    - MarsCode
+    - Cursor / Trade
+    - prompt engineering
+    - "交互" 前端不可替代
+    - 多语言 低代码 快速学习
+    - 不只是项目开发前 prompt 生成项目
+    - 细节功能 喂伪代码 aigc代码更靠谱
+
+- mysql
+  - mysql2 数据库驱动
+  - egg-sequelzie orm 框架
+    不需要写sql 直接对象开干
+    封装了sql
+  - service
+    CRUD
+  - model
+    User 
+  
+  - egg.js api 服务
+    - 路由 
+      http 协议
+    - controller
+      extends Controller
+      参数校验、业务逻辑
+      返回接口需要的json 数据
+    - model
+      模型定义 table -> model
+    - service
+      数据库操作 CRUD
+    - view
+      api 服务, 后端不负责界面, react 负责
+
+  - 登录注册
+    - 密码加密
+      不能纯明文,单向加密
+    - jwt json web token
+    {
+      id:1,
+      username:'admin',
+      level:'lv5',
+      password:'123456'
+    }
+    jwt sign token
+    后端签发
+    - secret 加密 服务器端才能解开
+    - 40几位的加密串
+    前端localStorage 存
+    axios 请求 拦截在请求头中
+    authorization: token(localStorage)
+    后端verfify token -> json user
+
+    - egg-jwt jsonwebtoken
+
+- 登录
+  - 前端 Login组件 submit
+  - api/login 全部的请求都在这
+    /login {username,password}
+  - utils/axios 封装了axios
+    - baseURL api/login
+    - /api 后端提供的接口地址的标志，前后端分离
+    - 不带/api,前端路由react-router-dom 管理
+  - axios 请求 被vite 配置的server 拦截
+    proxy 解决了跨域问题
+    rewrite /api 干掉了
+  - 后端提供接口 后端也可以不只提供接口  自己的mvc
+
+- 修改用户slogan
+  全栈功能  前端修改表单
+  后端 Update + MVC
+  - 前后端分离
+  - 先后端
+     - 提供一个修改slogan的接口
+       - 路由
+         restful api 一切皆资源 设计url的一种规范
+      - 中间件 鉴权
+        拦在控制器之前 token -> verify user 挂在ctx上, next()
+      - 控制器
+      - service
+        - model 已创建
+        - orm sequelize
+        数据库操作
+      - apifox 请求模拟器
+  - 再前端
+    - 路由
+    - userInfo 组件
+    - api editUserInfo
+# notebook 后端api服务
+
+## egg.js 阿里的开源框架
+- koa 极简
+  - middlewares 洋葱模型
+  - http listen
+  - ctx
+- 企业级开发 中大型项目
+  mvc
+  npm init egg --type=simple
+  后台开发的模板
+  - app 目录应用开发的主目录
+  - 约定大于一切
+    - router.js 后端路由
+
+- URL 的构成
+queryString params
+http://localhost:3000/user/1
+
+- csrf 攻击
+  - 拦截？
+    apifox 不是用户
+    userAgnet
+
+- post 请求体的格式
+  - form-data 有附件
+  - x-www-form-unlencoded  key=>value
+  - json  复杂数据结构
+- get / post

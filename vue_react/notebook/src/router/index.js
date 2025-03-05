@@ -2,6 +2,8 @@ import Home from '@/views/Home'
 import Data from '@/views/Data'
 import User from '@/views/User'
 import Login from '@/views/Login'
+import UserInfo from '@/views/UserInfo'
+
 const routes = [
   {
     path: '/',
@@ -14,6 +16,10 @@ const routes = [
   {
     path:'/user',
     component:User
+ },
+ {
+    path:'/userinfo',
+    component:UserInfo
  },
   {
   path:'/login',
