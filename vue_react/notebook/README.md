@@ -340,6 +340,18 @@
     - 路由
     - userInfo 组件
     - api editUserInfo
+
+- bill CRUD
+  - sql 建表
+  - mvc
+    - model
+      使用AI 生成prompt 基于sql,使用egg.js sequelize 生成model定义
+    - controller
+    - service
+    - router
+      restful
+      /bill post
+      /bill/:id patch
 # notebook 后端api服务
 
 ## egg.js 阿里的开源框架
